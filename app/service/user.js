@@ -1,15 +1,15 @@
 const Service = require('egg').Service;
 
 class UserService extends Service {
-  async find(username) {
-    const user = await this.app.mysql.select('e_users', {
-        where: { tel: username }
+  async find(tel) {
+    const data = await this.app.mysql.select('e_users', {
+        where: { tel: tel }
     });
     return {
       status: 0,
       message: 'ok',
-      data: user
-    };
+      data: data
+    }
   }
 }
 
