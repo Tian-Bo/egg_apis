@@ -8,7 +8,7 @@ module.exports = app => {
     router.post('/user/login', controller.wap.users.login)
     router.post('/user/register', controller.wap.users.register)
     router.post('/user/info/Modify', controller.wap.users.infoModify)
-    router.post('/user/test', controller.wap.users.infoModify)
+    router.get('/user/test', controller.wap.users.test)
 
 
 
