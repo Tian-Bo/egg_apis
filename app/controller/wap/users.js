@@ -70,6 +70,11 @@ class UsersController extends Controller {
     const tel = 18580557309
     this.ctx.body = await this.ctx.service.user.find(tel);
   }
+    // 获取用户所有信息
+	async test() {
+		const tel = 18580557309
+		this.ctx.body = await this.ctx.service.user.find(tel);
+	  }
 
 
   // 修改用户信息
