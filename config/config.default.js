@@ -32,11 +32,11 @@ module.exports = appInfo => {
         // 端口号
         port: '3306',
         // 用户名
-        user: 'egg',
+        user: 'tianbo',
         // 密码
         password: 'wusuowei',
         // 数据库名
-        database: 'egg',
+        database: 'xiaopaopao',
         },
         // 是否加载到 app 上，默认开启
         app: true,
