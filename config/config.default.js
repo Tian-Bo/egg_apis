@@ -4,11 +4,6 @@ const path = require('path');
 module.exports = appInfo => {
     const config = exports = {};
 
-    config.cluster = {
-        listen: {
-          port: 443
-        }
-    };
     // jwt配置
     config.jwt = {
         secret: '123456'
