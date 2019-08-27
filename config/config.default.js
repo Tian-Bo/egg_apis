@@ -47,3 +47,12 @@ module.exports = appInfo => {
     return config
 }
 
+// https
+exports.cluster = {
+    listen: {
+        https:{
+            key: '/app/public/2_apis.xiaopaopao.cn',
+            cert: '/app/public/1_apis.xiaopaopao.cn_bundle'
+        }
+    }
+}
