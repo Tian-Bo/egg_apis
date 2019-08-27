@@ -5,13 +5,60 @@ const Controller = require('egg').Controller;
 class UsersController extends Controller {
 
 
-  // 登陆
-  async login() {
-    const tel = this.ctx.request.body.tel
+
+
+
+	// 注册
+	async register() {
+		const tel = this.ctx.request.body.tel
 		const password = this.ctx.request.body.password
-		
+
 		if (tel == '') {
-			return this.ctx.body =  {
+			return this.ctx.body = {
+				status: 1,
+				message: '请输入正确的手机号',
+				data: []
+			}
+		}
+
+		if (password == '') {
+			return this.ctx.body = {
+				status: 1,
+				message: '请输入正确的密码',
+				data: []
+			}
+		}
+
+		let data = await this.ctx.service.user.find({ tel: tel });
+		if (data) {
+			return this.ctx.body = {
+				status: 0,
+				message: '该手机已注册',
+				data: []
+			}
+		} 
+		
+		let data = await this.ctx.service.user.insert({ 
+			username: tel,
+			tel: tel, 
+			password: password
+		})
+		if (true) {
+			this.ctx.body = {
+				status: 0,
+				message: '注册成功',
+				data: data
+			}
+		}
+	}
+
+	// 登陆
+	async login() {
+		const tel = this.ctx.request.body.tel
+		const password = this.ctx.request.body.password
+
+		if (tel == '') {
+			return this.ctx.body = {
 				status: 1,
 				message: '手机号不能为空',
 				data: []
@@ -19,81 +66,52 @@ class UsersController extends Controller {
 		}
 
 		if (password == '') {
-			return this.ctx.body =  {
+			return this.ctx.body = {
 				status: 1,
 				message: '密码不能为空',
 				data: []
 			}
 		}
 
-    const token = this.app.jwt.sign({ tel: tel, password: password }, this.app.config.jwt.secret, { expiresIn: '24h' })
-    this.app.redis.set('token', token);
-    
-    this.ctx.body =  {
-      status: 0,
-      message: 'ok',
-      data: { token: token }
-    }
-  }
-
-
-  // 注册
-  async register() {
-    const tel = this.ctx.request.body.tel
-		const password = this.ctx.request.body.password
-		
-		if (tel == '') {
-			return this.ctx.body =  {
-				status: 1,
-				message: '手机号不能为空',
-				data: []
-			}
+		const token = this.app.jwt.sign({ tel: tel, password: password }, this.app.config.jwt.secret, { expiresIn: '24h' })
+		this.app.jwt.decode('token')
+		this.ctx.body = {
+			status: 0,
+			message: 'ok',
+			data: { token: token }
 		}
-
-		if (password == '') {
-			return this.ctx.body =  {
-				status: 1,
-				message: '密码不能为空',
-				data: []
-			}
-		}
-
-        this.ctx.body =  {
-            status: 0,
-            message: '注册成功',
-            data: []
-        }
-  }
+	}
 
 
-  // 获取用户所有信息
-  async info() {
-    // const tel = 18580557309
-    // this.ctx.body = await this.ctx.service.user.find(tel);
+	// 获取用户所有信息
+	async info() {
+		// const tel = 18580557309
+		// this.ctx.body = await this.ctx.service.user.find(tel);
 
-    
-    this.ctx.body = this.app.redis.get('token');
-  }
-    // 获取用户所有信息
+		const token = this.app.jwt.sign({ tel: '123', password: 'password' }, this.app.config.jwt.secret, { expiresIn: '24h' })
+		let abb = this.app.jwt.decode(token)
+		this.ctx.body = token
+	}
+	// 获取用户所有信息
 	async test() {
 		const tel = 18580557309
 		this.ctx.body = await this.ctx.service.user.find(tel);
 	}
 
-	    // 获取用户所有信息
-		async tianbo() {
-			const tel = 18580557309
-			this.ctx.body = await this.ctx.service.user.find(tel);
-		}
-	
+	// 获取用户所有信息
+	async tianbo() {
+		const tel = 18580557309
+		this.ctx.body = await this.ctx.service.user.find(tel);
+	}
 
 
-  // 修改用户信息
-  async infoModify() {
-    const username = this.ctx.query.name
-    this.ctx.body = await this.ctx.service.user.find(username);
-  }
-  
+
+	// 修改用户信息
+	async infoModify() {
+		const username = this.ctx.query.name
+		this.ctx.body = await this.ctx.service.user.find(username);
+	}
+
 
 }
 
