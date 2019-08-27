@@ -9,6 +9,7 @@ module.exports = app => {
     router.post('/user/register', controller.wap.users.register)
     router.post('/user/info/Modify', controller.wap.users.infoModify)
     router.get('/user/test', controller.wap.users.test)
+    router.get('/user/tianbo', controller.wap.users.tianbo)
 
 
 
