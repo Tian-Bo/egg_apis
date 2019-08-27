@@ -18,3 +18,8 @@ exports.cors = {
     package: 'egg-cors',
 };
 
+exports.redis = {
+    enable: true,
+    package: 'egg-redis',
+};
+

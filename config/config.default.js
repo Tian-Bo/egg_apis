@@ -4,6 +4,15 @@ const path = require('path');
 module.exports = appInfo => {
     const config = exports = {};
 
+
+    config.redis = {
+        client: {
+            port: 7001,          // Redis port
+            host: '127.0.0.1',   // Redis host
+        },
+    }
+
+
     // jwt配置
     config.jwt = {
         secret: '123456'

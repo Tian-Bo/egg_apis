@@ -26,8 +26,9 @@ class UsersController extends Controller {
 			}
 		}
 
-    
     const token = this.app.jwt.sign({ tel: tel, password: password }, this.app.config.jwt.secret, { expiresIn: '24h' })
+    this.app.redis.set('token', token);
+    
     this.ctx.body =  {
       status: 0,
       message: 'ok',
@@ -57,18 +58,21 @@ class UsersController extends Controller {
 			}
 		}
 
-    this.ctx.body =  {
-			status: 0,
-			message: '注册成功',
-			data: []
-		}
+        this.ctx.body =  {
+            status: 0,
+            message: '注册成功',
+            data: []
+        }
   }
 
 
   // 获取用户所有信息
   async info() {
-    const tel = 18580557309
-    this.ctx.body = await this.ctx.service.user.find(tel);
+    // const tel = 18580557309
+    // this.ctx.body = await this.ctx.service.user.find(tel);
+
+    
+    this.ctx.body = this.app.redis.get('token');
   }
     // 获取用户所有信息
 	async test() {

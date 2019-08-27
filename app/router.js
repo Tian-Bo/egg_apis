@@ -4,9 +4,9 @@ module.exports = app => {
     const { router, controller, jwt } = app;
     
     // 用户模块
-    router.get('/user/info', controller.wap.users.info)
-    router.post('/user/login', controller.wap.users.login)
+    router.post('/user/login', jwt, controller.wap.users.login)
     router.post('/user/register', controller.wap.users.register)
+    router.get('/user/info', controller.wap.users.info)
     router.post('/user/info/Modify', controller.wap.users.infoModify)
     router.get('/user/test', controller.wap.users.test)
     router.get('/user/tianbo', controller.wap.users.tianbo)
