@@ -6,7 +6,9 @@ module.exports = appInfo => {
 
     config.cluster = {
         listen: {
-          port: 443
+          port: 443,
+          key: '/app/public/1_apis.xiaopaopao.cn_bundle',
+          cert  : '/app/public/2_apis.xiaopaopao.cn'
         }
     };
     // jwt配置
