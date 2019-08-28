@@ -29,22 +29,25 @@ class UsersController extends Controller {
 			}
 		}
 
-		let data = await this.ctx.service.user.find({ tel: tel });
-		if (data) {
+		let findData = await this.ctx.service.user.find('e_users', { 
+			tel: tel
+		})
+		if (findData) {
 			return this.ctx.body = {
-				status: 0,
+				status: 1,
 				message: '该手机已注册',
 				data: []
 			}
 		} 
 		
-		let data = await this.ctx.service.user.insert({ 
+		let insertData = await this.ctx.service.user.insert('e_users', { 
 			username: tel,
 			tel: tel, 
 			password: password
 		})
-		if (true) {
-			this.ctx.body = {
+
+		if (insertData) {
+			return this.ctx.body = {
 				status: 0,
 				message: '注册成功',
 				data: data
