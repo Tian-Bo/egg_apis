@@ -9,7 +9,7 @@ class UserService extends Service {
 		return data
 	}
 
-	增
+	// 增
 	async insert(where) {
 		const data = await this.app.mysql.insert('e_users', { where })
 		if (data.length == 0) {
