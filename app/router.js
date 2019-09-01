@@ -4,10 +4,13 @@ module.exports = app => {
     const { router, controller, jwt } = app;
     
     // 用户模块
-    router.post('/user/login', controller.wap.users.login)
-    router.post('/user/register', controller.wap.users.register)
-    router.post('/user/code', controller.wap.users.getCode)
-    router.get('/user/info', jwt, controller.wap.users.info)
+    router.post('/user/login', controller.wap.users.login) // 登陆
+    router.post('/user/register', controller.wap.users.register) // 注册
+    router.get('/user/info', jwt, controller.wap.users.info) // 获取用户信息
+
+    // 授权模块
+    router.post('/user/code', controller.wap.users.getCode) // 获取验证码
+
 
 
 

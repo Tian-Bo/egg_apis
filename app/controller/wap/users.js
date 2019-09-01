@@ -81,7 +81,7 @@ class UsersController extends Controller {
         let userInfo = await this.ctx.service.user.find('e_users', { 
             tel: tokenInfo.tel
 		})
-		this.ctx.body = userInfo
+        this.ctx.body = userInfo
     }
     
 	// TODO 发送短信

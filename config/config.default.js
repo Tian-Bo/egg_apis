@@ -11,11 +11,11 @@ module.exports = appInfo => {
 
     // ajax 跨域配置
     config.security = {
-        csrf:{
-            enable:false
+        csrf: {
+            enable: false
         }
     }
-    config.cors ={
+    config.cors = {
         origin: '*',
         allowMethods: 'GET, HEAD, PUT, OPTIONS, POST, DELETE, PATCH'
     }
@@ -27,16 +27,16 @@ module.exports = appInfo => {
     config.mysql = {
         // 单数据库信息配置
         client: {
-        // host
-        host: '129.28.206.237',
-        // 端口号
-        port: '3306',
-        // 用户名
-        user: 'tianbo',
-        // 密码
-        password: 'wusuowei',
-        // 数据库名
-        database: 'xiaopaopao',
+            // host
+            host: '129.28.206.237',
+            // 端口号
+            port: '3306',
+            // 用户名
+            user: 'tianbo',
+            // 密码
+            password: 'wusuowei',
+            // 数据库名
+            database: 'xiaopaopao',
         },
         // 是否加载到 app 上，默认开启
         app: true,
@@ -50,9 +50,10 @@ module.exports = appInfo => {
 // https
 exports.cluster = {
     listen: {
-        https:{
+        https: {
             key: '/app/public/2_apis.xiaopaopao.cn',
             cert: '/app/public/1_apis.xiaopaopao.cn_bundle'
         }
     }
 }
+
