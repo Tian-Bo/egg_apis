@@ -9,6 +9,11 @@ module.exports = appInfo => {
         secret: '123456'
     };
 
+    // config/config.default.js
+    exports.multipart = {
+        mode: 'file',
+    };
+
     // ajax 跨域配置
     config.security = {
         csrf: {

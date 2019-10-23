@@ -48,17 +48,15 @@ class UsersController extends Controller {
         if (!check.checkTel(tel)) {
 			return this.ctx.body = unifyRes.resFail('', '手机号格式错误')
 		}
-		if (!check.checkPassword(password)) {
-			return this.ctx.body = unifyRes.resFail('', '密码格式错误')
-        }
         
         // TO 验证是否注册
-        let findData = await this.ctx.service.user.find('t_users', { 
+        let findData = await this.ctx.service.db.find('t_users', { 
 			tel: tel
 		})
 		if (!findData) {
             return this.ctx.body = unifyRes.resFail('', '该手机未注册')
         }
+        // 验证密码是否正确
         if (findData[0].password != password) {
             return this.ctx.body = unifyRes.resFail('', '密码错误')
         }
