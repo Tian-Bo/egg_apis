@@ -3,6 +3,9 @@
 module.exports = app => {
     const { router, controller, jwt } = app;
 
+    // common
+    router.post('/upload', controller.common.upload.upload); // 上传图片
+
     // wap
     // 用户模块
     router.post('/user/login', controller.wap.users.login) // 登陆
@@ -15,6 +18,7 @@ module.exports = app => {
 
 
     // admin
+    router.get('/active/model', jwt, controller.merchant.activeModel.getActiveModel) // 获取用户信息
 
 
 

@@ -21,7 +21,7 @@ class UsersController extends Controller {
 		}
 
         // TO 验证是否注册
-		let findData = await this.ctx.service.user.find('t_users', { 
+		let findData = await this.ctx.service.db.find('t_users', { 
 			tel: tel
 		})
 		if (findData) {
@@ -29,7 +29,7 @@ class UsersController extends Controller {
 		} 
         
         // TO 验证通过,开始注册
-		let insertData = await this.ctx.service.user.insert('t_users', { 
+		let insertData = await this.ctx.service.db.insert('t_users', { 
 			username: tel,
 			tel: tel, 
 			password: password
@@ -53,7 +53,7 @@ class UsersController extends Controller {
         }
         
         // TO 验证是否注册
-        let findData = await this.ctx.service.user.find('t_users', { 
+        let findData = await this.ctx.service.db.find('t_users', { 
 			tel: tel
 		})
 		if (!findData) {
@@ -78,7 +78,7 @@ class UsersController extends Controller {
         let tokenInfo = this.app.jwt.decode(token)
 
         // TO 解析成功, 查询用户信息
-        let userInfo = await this.ctx.service.user.find('t_users', { 
+        let userInfo = await this.ctx.service.db.find('t_users', { 
             tel: tokenInfo.tel
 		})
         this.ctx.body = unifyRes.resSuccess(userInfo[0], '获取成功')
