@@ -1,14 +1,22 @@
 'use strict'
 
 const Controller = require('egg').Controller
-const unifyRes = require('../../public/js/unifyRes')
 
 class ActiveModelController extends Controller {
-    async getActiveModel() {
-        // TO 获取用户信息
-        let userInfo = await this.ctx.service.db.find('t_active_model')
-        this.ctx.body = unifyRes.resSuccess(userInfo, '获取成功')
+    
+    // 活动所有活动模型
+    async activeModel() {
+        const { ctx } = this
+        let model_id = ctx.request.query.model_id || ''
+        ctx.body = model_id
+
+        let sql = { type: model_id }
+        if (model_id == '') {
+            sql = ''
+        }
+        ctx.body = await ctx.service.db.find('t_active_model', sql)
     }
+
 }
 
 module.exports = ActiveModelController

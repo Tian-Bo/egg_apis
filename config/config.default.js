@@ -9,6 +9,22 @@ module.exports = appInfo => {
         secret: '123456'
     };
 
+    // config/config.default.js
+    config.multipart = {
+        mode: 'file',
+    };
+
+    // oss 配置文件
+    config.oss = {
+        client: {
+          accessKeyId: 'LTAI4FgrUYC97mLPThWqacBk',
+          accessKeySecret: '0gyITkCZxNfP8LaQBvoX5hS2JrRjbO',
+          bucket: 'hdgyun',
+          endpoint: 'oss-cn-beijing.aliyuncs.com',
+          timeout: '60s',
+        },
+    };
+
     // ajax 跨域配置
     config.security = {
         csrf: {

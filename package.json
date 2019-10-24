@@ -7,6 +7,7 @@
     "declarations": true
   },
   "dependencies": {
+    "ali-oss": "^6.1.1",
     "await-stream-ready": "^1.0.1",
     "egg": "^2.15.1",
     "egg-cluster": "^1.25.0",
@@ -14,6 +15,7 @@
     "egg-jwt": "^3.1.6",
     "egg-mysql": "^3.0.0",
     "egg-onerror": "^2.1.0",
+    "egg-oss": "^2.0.0",
     "egg-redis": "^2.4.0",
     "egg-scripts": "^2.11.0",
     "qcloudsms_js": "^0.1.1",

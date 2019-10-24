@@ -3,23 +3,33 @@
 module.exports = app => {
     const { router, controller, jwt } = app;
 
-    // common
-    router.post('/upload', controller.common.upload.upload); // 上传图片
-
     // wap
     // 用户模块
-    router.post('/user/login', controller.wap.users.login) // 登陆
-    router.post('/user/register', controller.wap.users.register) // 注册
-    router.get('/user/info', jwt, controller.wap.users.info) // 获取用户信息
+    // router.post('/user/login', controller.wap.users.login) // 登陆
+    // router.post('/user/register', controller.wap.users.register) // 注册
+    // router.get('/user/info', jwt, controller.wap.users.info) // 获取用户信息
 
     // 授权模块
-    router.post('/user/code', controller.wap.users.getCode) // 获取验证码
+    // router.post('/user/code', controller.wap.users.getCode) // 获取验证码
 
 
 
-    // admin
-    router.get('/active/model', jwt, controller.merchant.activeModel.getActiveModel) // 获取用户信息
 
+
+
+    // merchant
+    // 用户模块
+    router.post('/user/login', controller.merchant.users.login) // 登陆
+    router.post('/user/register', controller.merchant.users.register) // 注册
+    router.get('/user/info', jwt, controller.merchant.users.info) // 获取用户信息
+
+    // 授权模块
+    router.post('/user/code', controller.merchant.users.getCode) // 获取验证码
+
+    // 上传模块
+    router.post('/upload/img', controller.merchant.upload.uploadImg) // 上传图片
+
+    router.get('/active/model', controller.merchant.activeModel.activeModel) // 获取活动模型列表
 
 
 
