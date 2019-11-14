@@ -81,6 +81,15 @@ class UsersController extends Controller {
 		})
         this.ctx.body = unifyRes.resSuccess(userInfo[0], '获取成功')
     }
+
+    // TODO 修改用户信息
+    async editInfo() {
+        const authorization = this.ctx.request.header.authorization
+
+        // TO 解析token, 获取用户信息
+        let token = authorization.split('Bearer ')[1]
+        let tokenInfo = this.app.jwt.decode(token)
+    }
     
 	// TODO 发送短信
 	async getCode() {

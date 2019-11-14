@@ -22,7 +22,7 @@ class UploadController extends Controller {
                 // 需要删除临时文件
                 await fs.unlink(file.filepath)
             }
-            arr.push(result.url)
+            arr.push(result.name)
         }
         if (arr.length == 1) {
             arr = arr[0]
