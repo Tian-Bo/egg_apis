@@ -18,7 +18,7 @@ exports.cors = {
     package: 'egg-cors',
 };
 
-// config/plugin.js
+// 上传orr文件
 exports.oss = {
     enable: true,
     package: 'egg-oss',
