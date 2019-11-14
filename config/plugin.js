@@ -22,4 +22,10 @@ exports.cors = {
 exports.oss = {
     enable: true,
     package: 'egg-oss',
-  };
+};
+
+// 参数校验
+exports.validate = {
+    enable: true,
+    package: 'egg-validate',
+};

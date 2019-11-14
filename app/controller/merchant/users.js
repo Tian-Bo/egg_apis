@@ -41,30 +41,43 @@ class UsersController extends Controller {
 
 	// TODO 登陆
 	async login() {
-		const tel = this.ctx.request.body.tel
-		const password = this.ctx.request.body.password
-
-        // TO 验证参数格式
-        if (!check.checkTel(tel)) {
-			return this.ctx.body = unifyRes.resFail('', '手机号格式错误')
-		}
         
-        // TO 验证是否注册
-        let findData = await this.ctx.service.db.find('t_users', { 
-			tel: tel
-		})
-		if (!findData) {
-            return this.ctx.body = unifyRes.resFail('', '该手机未注册')
-        }
-        // 验证密码是否正确
-        if (findData[0].password != password) {
-            return this.ctx.body = unifyRes.resFail('', '密码错误')
+        try {
+            this.ctx.validate({
+                title: { type: 'Number', required: false },
+                content: { type: 'string' },
+            });
+        } catch (err) {
+            this.ctx.logger.warn('err.errors');
+            this.ctx.body = { success: false };
+            return;
         }
 
-        // TO 验证通过, 允许登陆
-        const token = this.app.jwt.sign({ id: findData.id, tel: tel, password: password }, this.app.config.jwt.secret, { expiresIn: '24h' })
-        let data = { token: token }
-		return this.ctx.body = unifyRes.resSuccess(data, '登陆成功')
+        this.ctx.body = '1111'
+		// const tel = this.ctx.request.body.tel
+		// const password = this.ctx.request.body.password
+
+        // // TO 验证参数格式
+        // if (!check.checkTel(tel)) {
+		// 	return this.ctx.body = unifyRes.resFail('', '手机号格式错误')
+		// }
+        
+        // // TO 验证是否注册
+        // let findData = await this.ctx.service.db.find('t_users', { 
+		// 	tel: tel
+		// })
+		// if (!findData) {
+        //     return this.ctx.body = unifyRes.resFail('', '该手机未注册')
+        // }
+        // // 验证密码是否正确
+        // if (findData[0].password != password) {
+        //     return this.ctx.body = unifyRes.resFail('', '密码错误')
+        // }
+
+        // // TO 验证通过, 允许登陆
+        // const token = this.app.jwt.sign({ id: findData.id, tel: tel, password: password }, this.app.config.jwt.secret, { expiresIn: '24h' })
+        // let data = { token: token }
+		// return this.ctx.body = unifyRes.resSuccess(data, '登陆成功')
 	}
 
 	// TODO 获取用户所有信息
