@@ -19,6 +19,9 @@ module.exports = app => {
     router.get('/active/model', controller.merchant.activeModel.activeModel) // 获取活动模型列表
 
 
+    router.post('/stream', controller.merchant.stream.stream)
+
+
 
 
 

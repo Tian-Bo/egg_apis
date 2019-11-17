@@ -42,18 +42,37 @@ class UsersController extends Controller {
 	// TODO 登陆
 	async login() {
         
-        try {
-            this.ctx.validate({
-                title: { type: 'Number', required: false },
-                content: { type: 'string' },
-            });
-        } catch (err) {
-            this.ctx.logger.warn('err.errors');
-            this.ctx.body = { success: false };
-            return;
-        }
+        // try {
+        //     this.ctx.validate({
+        //         title: { type: 'Number', required: false },
+        //         content: { type: 'string' },
+        //     });
+        // } catch (err) {
+        //     this.ctx.logger.warn('err.errors');
+        //     this.ctx.body = { success: false };
+        //     return;
+        // }
 
-        this.ctx.body = '1111'
+        // const createRule = {
+        //     tel: { type: 'Number' },
+        //     password: { type: 'string' },
+        // }
+
+        // try {
+        //     this.ctx.validate(createRule);
+        // } catch (err) {
+        //     this.ctx.body = { success: false };
+        //     return;
+        // }
+
+        this.ctx.body = this.ctx.bar('1111')
+
+        // const rule = { tel: 'string' };
+        // this.ctx.validate(rule, this.ctx.query);
+
+        // this.ctx.body = this.ctx.helper.formatUser('user1');
+
+        // this.ctx.body = '1111'
 		// const tel = this.ctx.request.body.tel
 		// const password = this.ctx.request.body.password
 

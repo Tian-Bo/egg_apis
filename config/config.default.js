@@ -11,8 +11,12 @@ module.exports = appInfo => {
 
     // config/config.default.js
     config.multipart = {
-        mode: 'file',
-    };
+        mode: 'stream',
+        // let POST /upload_file request use the file mode, other requests use the stream mode.
+        fileModeMatch: /^\/upload_file$/,
+        // or glob
+        // fileModeMatch: '/upload_file',
+      };
 
     // oss 配置文件
     config.oss = {
@@ -70,6 +74,17 @@ module.exports = appInfo => {
             ctx.status = 500;
         }
     }
+
+    // 加载 errorHandler 中间件
+    config.middleware = [ 'errorHandler', 'gzip' ]
+    // 只对 /api 前缀的 url 路径生效
+    config.errorHandler = {
+      match: '/api',
+    }
+    // 中间件配置
+    config.gzip = {
+        threshold: 1024, // 小于 1k 的响应体不压缩
+    },
 
     config.validate = {
         // convert: false,
