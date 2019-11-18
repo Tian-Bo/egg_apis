@@ -44,7 +44,7 @@ class UsersController extends Controller {
         const { tel, password } = ctx.request.body
 
         // TO 验证参数格式
-        if (!check.checkel(tel)) {
+        if (!check.checkTel(tel)) {
 			return ctx.body = this.fail('', '手机号格式错误')
 		}
 		if (!check.checkPassword(password)) {

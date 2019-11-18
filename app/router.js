@@ -5,7 +5,7 @@ module.exports = app => {
 
     // merchant
     // 用户模块
-    router.post('/user/login', jwt, controller.merchant.users.login) // 登陆
+    router.post('/user/login', controller.merchant.users.login) // 登陆
     router.post('/user/register', controller.merchant.users.register) // 注册
     router.get('/user/info', jwt, controller.merchant.users.info) // 获取用户信息
     router.post('/user/edit/info', controller.merchant.users.editInfo)
