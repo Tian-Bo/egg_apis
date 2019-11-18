@@ -4,19 +4,18 @@ const path = require('path');
 module.exports = appInfo => {
     const config = exports = {};
 
+
     // jwt配置
     config.jwt = {
-        secret: '123456'
+        secret: 'tianbo'
     };
 
-    // config/config.default.js
+
+    // stream
     config.multipart = {
-        mode: 'stream',
-        // let POST /upload_file request use the file mode, other requests use the stream mode.
-        fileModeMatch: /^\/upload_file$/,
-        // or glob
-        // fileModeMatch: '/upload_file',
-      };
+        mode: 'file',
+    };
+
 
     // oss 配置文件
     config.oss = {
@@ -29,6 +28,7 @@ module.exports = appInfo => {
         },
     };
 
+
     // ajax 跨域配置
     config.security = {
         csrf: {
@@ -40,8 +40,10 @@ module.exports = appInfo => {
         allowMethods: 'GET, HEAD, PUT, OPTIONS, POST, DELETE, PATCH'
     }
 
+
     // 用于cookie签名密钥，应更改为您自己的并保持安全
     config.keys = appInfo.name + '_1563969821490_813';
+
 
     // 数据库配置信息
     config.mysql = {
@@ -64,6 +66,7 @@ module.exports = appInfo => {
         agent: false
     }
 
+
     // 统一错误处理
     config.onerror = {
         // 线上页面发生异常时，重定向到这个页面上
@@ -71,36 +74,40 @@ module.exports = appInfo => {
             // 在此处定义针对所有响应类型的错误处理方法
             // 注意，定义了 config.all 之后，其他错误处理方法不会再生效
             ctx.body = JSON.stringify(err);
-            ctx.status = 500;
+            // ctx.status = 500;
         }
     }
 
-    // 加载 errorHandler 中间件
-    config.middleware = [ 'errorHandler', 'gzip' ]
-    // 只对 /api 前缀的 url 路径生效
-    config.errorHandler = {
-      match: '/api',
+    config.notfound = {
+        pageUrl: '/404.html',
     }
-    // 中间件配置
-    config.gzip = {
-        threshold: 1024, // 小于 1k 的响应体不压缩
-    },
 
-    config.validate = {
+
+    // // 中间件配置
+    config.middleware = [ 'errorHandler' ]
+    // config.errorHandler = {
+    //   match: '/api',
+    // }
+    // // 中间件配置
+    // config.gzip = {
+    //     threshold: 1024, // 小于 1k 的响应体不压缩
+    // }
+
+    // config.validate = {
         // convert: false,
         // validateRoot: false,
-    };
+    // };
 
     return config
 }
 
 // https
-exports.cluster = {
-    listen: {
-        https: {
-            key: '/app/public/2_apis.xiaopaopao.cn',
-            cert: '/app/public/1_apis.xiaopaopao.cn_bundle'
-        }
-    }
-}
+// exports.cluster = {
+//     listen: {
+//         https: {
+//             key: '/app/public/2_apis.xiaopaopao.cn',
+//             cert: '/app/public/1_apis.xiaopaopao.cn_bundle'
+//         }
+//     }
+// }
 

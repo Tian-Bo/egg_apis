@@ -5,22 +5,20 @@ module.exports = app => {
 
     // merchant
     // 用户模块
-    router.post('/user/login', controller.merchant.users.login) // 登陆
+    router.post('/user/login', jwt, controller.merchant.users.login) // 登陆
     router.post('/user/register', controller.merchant.users.register) // 注册
     router.get('/user/info', jwt, controller.merchant.users.info) // 获取用户信息
     router.post('/user/edit/info', controller.merchant.users.editInfo)
 
     // 授权模块
-    router.post('/user/code', controller.merchant.users.getCode) // 获取验证码
+    router.post('/user/code', controller.merchant.cms.getCode) // 获取验证码
 
     // 上传模块
     router.post('/upload/img', controller.merchant.upload.uploadImg) // 上传图片
 
+
+    // 活动模块
     router.get('/active/model', controller.merchant.activeModel.activeModel) // 获取活动模型列表
-
-
-    router.post('/stream', controller.merchant.stream.stream)
-
 
 
 

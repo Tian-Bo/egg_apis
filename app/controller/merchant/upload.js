@@ -1,11 +1,8 @@
 'use strict';
 
+const Controller = require('../../core/base_controller')
 const path = require('path');
-const Controller = require('egg').Controller;
-const unifyRes = require('../../public/js/unifyRes')
 const fs = require('mz/fs');
-
-
 
 class UploadController extends Controller {
 
@@ -27,7 +24,8 @@ class UploadController extends Controller {
         if (arr.length == 1) {
             arr = arr[0]
         }
-        ctx.body = unifyRes.resSuccess(arr, '上传成功')
+        
+        ctx.body = this.success(arr, '上传成功')
 
     }
 }
