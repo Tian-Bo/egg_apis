@@ -2,6 +2,10 @@
 
 module.exports = app => {
     const { router, controller, jwt } = app;
+    // const gzip = app.middleware.gzip({ threshold: 1024 });
+    
+    // 中间件测试
+    app.router.get('/needgzip', app.middleware.gzip, app.controller.merchant.users.info);
 
     // merchant
     // 用户模块
