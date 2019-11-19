@@ -19,17 +19,17 @@ class UsersController extends Controller {
 		}
 
         // TO 验证是否注册
-		let findData = await service.db.find('t_users', { 
-			tel: tel
+		let findData = await service.db.find('users', { 
+			user_tel: tel
 		})
 		if (findData) {
             return ctx.body = this.fail('', '该手机已注册')
 		} 
         
         // TO 验证通过,开始注册
-		let insertData = await service.db.insert('t_users', { 
-			username: tel,
-			tel: tel, 
+		let insertData = await service.db.insert('users', { 
+			user_name: tel,
+			user_tel: tel, 
 			password: password
         })
         
@@ -40,38 +40,6 @@ class UsersController extends Controller {
 
 	// TODO 登陆
 	async login() {
-<<<<<<< HEAD
-        
-        // try {
-        //     this.ctx.validate({
-        //         title: { type: 'Number', required: false },
-        //         content: { type: 'string' },
-        //     });
-        // } catch (err) {
-        //     this.ctx.logger.warn('err.errors');
-        //     this.ctx.body = { success: false };
-        //     return;
-        // }
-
-		const tel = this.ctx.request.body.tel
-		const password = this.ctx.request.body.password
-
-        // TO 验证参数格式
-        if (!check.checkTel(tel)) {
-			return this.ctx.body = unifyRes.resFail('', '手机号格式错误')
-		}
-        
-        // TO 验证是否注册
-        let findData = await this.ctx.service.db.find('t_users', { 
-			tel: tel
-		})
-		if (!findData) {
-            return this.ctx.body = unifyRes.resFail('', '该手机未注册')
-        }
-        // 验证密码是否正确
-        if (findData[0].password != password) {
-            return this.ctx.body = unifyRes.resFail('', '密码错误')
-=======
         const { ctx, service } = this;
         const { tel, password } = ctx.request.body
 
@@ -84,46 +52,30 @@ class UsersController extends Controller {
         }
 
         // TO 验证是否注册
-        let findData = await service.db.find('t_users', { 
-			tel: tel
+        let findData = await service.db.find('users', { 
+			user_tel: tel
 		})
 		if (!findData) {
             return ctx.body = this.fail('', '该手机未注册')
         }
 
         // 验证密码是否正确
-        if (findData[0].password != password) {
+        if (findData[0].user_password != password) {
             return ctx.body = this.fail('', '密码错误')
->>>>>>> 131748bece15f7a175cddedee75ace1ca55e337c
         }
 
         // TO 验证通过, 允许登陆
-        const token = this.app.jwt.sign({ id: findData.id, tel: tel, password: password }, this.app.config.jwt.secret, { expiresIn: '24h' })
-        let data = { token: token }
-<<<<<<< HEAD
-		return this.ctx.body = unifyRes.resSuccess(data, '登陆成功')
-=======
+        const token = this.app.jwt.sign({ id: findData.user_id, tel: tel, password: password }, this.app.config.jwt.secret, { expiresIn: '24h' })
+        let data = { 
+            token: token,
+            user_info: findData[0]
+         }
 
 		ctx.body = this.success(data, '登陆成功')
->>>>>>> 131748bece15f7a175cddedee75ace1ca55e337c
 	}
 
 	// TODO 获取用户信息
 	async info() {
-<<<<<<< HEAD
-        // const authorization = this.ctx.request.header.authorization
-
-        // // TO 解析token, 获取用户信息
-        // let token = authorization.split('Bearer ')[1]
-        // let tokenInfo = this.app.jwt.decode(token)
-
-        // // TO 解析成功, 查询用户信息
-        // let userInfo = await this.ctx.service.db.find('t_users', { 
-        //     tel: tokenInfo.tel
-		// })
-        // this.ctx.body = unifyRes.resSuccess(userInfo[0], '获取成功')
-        this.ctx.body = unifyRes.resSuccess([], '获取成功')
-=======
         const { app, ctx, service } = this;
         const { authorization } = ctx.request.header
 
@@ -132,12 +84,11 @@ class UsersController extends Controller {
         let tokenInfo = app.jwt.decode(token)
 
         // TO 解析成功, 查询用户信息
-        let userInfo = await service.db.find('t_users', { 
-            tel: tokenInfo.tel
+        let userInfo = await service.db.find('users', { 
+            user_tel: tokenInfo.tel
         })
         
         ctx.body = this.success(userInfo[0], '获取成功')
->>>>>>> 131748bece15f7a175cddedee75ace1ca55e337c
     }
 
     // TODO 修改用户信息
