@@ -12,7 +12,7 @@ class UserService extends Service {
 	// 增
 	async insert(table, where) {
 		const result = await this.app.mysql.insert(table, where)
-		return true
+		return result
 	}
 }
 

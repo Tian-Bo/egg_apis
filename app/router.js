@@ -15,13 +15,14 @@ module.exports = app => {
     router.post('/user/edit/info', controller.merchant.users.editInfo)
 
     // 授权模块
-    router.post('/user/code', controller.merchant.users.getCode) // 获取验证码
+    router.post('/user/code', controller.merchant.cms.getCode) // 获取验证码
 
     // 上传模块
     router.post('/upload/img', controller.merchant.upload.uploadImg) // 上传图片
 
-    router.get('/active/model', controller.merchant.activeModel.activeModel) // 获取活动模型列表
 
+    // 活动模块
+    router.get('/active/model', controller.merchant.activeModel.activeModel) // 获取活动模型列表
 
 
 
