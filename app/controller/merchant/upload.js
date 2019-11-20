@@ -13,13 +13,13 @@ class UploadController extends Controller {
         for (const file of ctx.request.files) {
             let result
             try {
-                const filename = 'xiaopaopao/' +  Date.now() + '' + Number.parseInt(Math.random() * 10000) + path.basename(file.filename);
+                const filename = Date.now() + '' + Number.parseInt(Math.random() * 10000) + path.basename(file.filename);
                 result = await ctx.oss.put(filename, file.filepath)
             } finally {
                 // 需要删除临时文件
                 await fs.unlink(file.filepath)
             }
-            arr.push(result.name)
+            arr.push(result.url)
         }
         if (arr.length == 1) {
             arr = arr[0]
