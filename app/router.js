@@ -20,7 +20,6 @@ module.exports = app => {
     // 上传模块
     router.post('/upload/img', controller.merchant.upload.uploadImg) // 上传图片
 
-
     // 活动模块
     router.get('/active/model', controller.merchant.activeModel.activeModel) // 获取活动模型列表
 

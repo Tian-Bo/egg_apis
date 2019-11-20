@@ -30,7 +30,7 @@ class UsersController extends Controller {
 		let insertData = await service.db.insert('users', { 
 			user_name: tel,
 			user_tel: tel, 
-			password: password
+			user_password: password
         })
         
 		if (insertData) {
