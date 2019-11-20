@@ -19,7 +19,7 @@ class UsersController extends Controller {
 		}
 
         // TO 验证是否注册
-		let findData = await service.db.find('users', { 
+		let findData = await service.db.find('user', { 
 			user_tel: tel
 		})
 		if (findData) {
@@ -27,7 +27,7 @@ class UsersController extends Controller {
 		} 
         
         // TO 验证通过,开始注册
-		let insertData = await service.db.insert('users', { 
+		let insertData = await service.db.insert('user', { 
 			user_name: tel,
 			user_tel: tel, 
 			user_password: password
@@ -52,7 +52,7 @@ class UsersController extends Controller {
         }
 
         // TO 验证是否注册
-        let findData = await service.db.find('users', { 
+        let findData = await service.db.find('user', { 
 			user_tel: tel
 		})
 		if (!findData) {
@@ -84,7 +84,7 @@ class UsersController extends Controller {
         let tokenInfo = app.jwt.decode(token)
 
         // TO 解析成功, 查询用户信息
-        let userInfo = await service.db.find('users', { 
+        let userInfo = await service.db.find('user', { 
             user_tel: tokenInfo.tel
         })
         
