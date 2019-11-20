@@ -1,20 +1,25 @@
 'use strict'
 
-const Controller = require('egg').Controller
+const Controller = require('../../core/base_controller')
 
 class ActiveModelController extends Controller {
     
     // 活动所有活动模型
-    async activeModel() {
+    async info() {
         const { ctx } = this
+
         let model_id = ctx.request.query.model_id || ''
-        ctx.body = model_id
 
         let sql = { type: model_id }
         if (model_id == '') {
             sql = ''
         }
-        ctx.body = await ctx.service.db.find('t_active_model', sql)
+
+        const result = await ctx.service.db.find('active_model', sql)
+
+        if (result) {
+            return ctx.body = this.success(result, '获取成功')
+		} 
     }
 
 }
